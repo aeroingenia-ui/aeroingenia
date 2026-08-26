@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroIngenia — Fumigación y siembra con drones | Ñuble y Biobío</title>
+<meta name="description" content="Fumigación y siembra aérea con drones en las regiones de Ñuble y Biobío. Hasta 14 hectáreas por hora con precisión RTK y tasa variable. Visita técnica sin costo.">
+<meta name="theme-color" content="#0d2117">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:title" content="AeroIngenia — Fumigación y siembra con drones">
+<meta property="og:description" content="Hasta 14 hectáreas por hora con precisión RTK. Viñedos, trigo, avena, praderas y plantaciones forestales en Ñuble y Biobío.">
+<meta property="og:image" content="publicidad.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== BARRA DE LANZAMIENTO ===== -->
+<div class="promo" id="promo">
+  <div class="container promo__inner">
+    <p><strong>Descuento de lanzamiento</strong> — válido hasta el 30 de septiembre de 2026. Cupos limitados para esta temporada.</p>
+    <button class="promo__close" id="promoClose" aria-label="Cerrar aviso de lanzamiento">&times;</button>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#inicio" class="logo" aria-label="AeroIngenia, ir al inicio">
+      <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#0d2117"/>
+        <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <circle cx="32" cy="32" r="24.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".55"/>
+        <!-- brazos del rotor -->
+        <path d="M18 18 32 32 46 18M18 46 32 32 46 46" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+        <!-- rotores -->
+        <circle cx="17" cy="17" r="5" fill="#fff"/><circle cx="47" cy="17" r="5" fill="#fff"/>
+        <circle cx="17" cy="47" r="5" fill="#fff"/><circle cx="47" cy="47" r="5" fill="#fff"/>
+        <!-- semilla central -->
+        <path d="M32 22c5 5 5 15 0 20-5-5-5-15 0-20Z" fill="currentColor"/>
+      </svg>
+      <span class="logo__text">Aero<strong>Ingenia</strong><em>Ingeniería agrícola de precisión</em></span>
+    </a>
+
+    <nav class="nav__links" id="navLinks">
+      <a href="#servicios">Servicios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#cultivos">Cultivos</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#cobertura">Cobertura</a>
+      <a href="#contacto" class="btn btn--sm btn--wsp nav__cta">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
+        Cotizar
+      </a>
+    </nav>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <span class="pill reveal"><span class="pill__dot"></span> Fumigación y siembra con drones · Ñuble y Biobío</span>
+      <h1 class="reveal">Terminamos en horas<br><span class="grad">lo que tomaba días.</span></h1>
+      <p class="lead reveal">Fumigación y siembra aérea con dron XAG P30. Hasta <strong>14 hectáreas por hora</strong> con precisión RTK y pulverización de tasa variable: aplicamos solo lo necesario y ahorras insumos.</p>
+      <div class="hero__actions reveal">
+        <a href="#contacto" class="btn btn--wsp btn--lg" data-wsp>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+        <a href="#equipo" class="btn btn--ghost btn--lg">Ver el equipo</a>
+      </div>
+      <ul class="hero__trust reveal">
+        <li>Visita técnica sin costo</li>
+        <li>Cotizaciones desde $18.000/ha</li>
+        <li>Operamos en laderas y terrenos difíciles</li>
+      </ul>
+    </div>
+
+    <div class="hero__visual reveal">
+      <div class="spec-card">
+        <div class="spec-card__head">
+          <div>
+            <p class="spec-card__label">Equipo operativo</p>
+            <p class="spec-card__title">Dron agrícola XAG P30</p>
+          </div>
+          <span class="chip"><span class="chip__dot"></span>En terreno</span>
+        </div>
+
+        <div class="swath" id="swath" role="img" aria-label="Simulación de la grilla de vuelo del dron cubriendo un potrero con pasadas paralelas"></div>
+
+        <p class="swath__caption">Grilla de vuelo automática — pasadas paralelas de 2 a 6 m de ancho</p>
+
+        <div class="spec-card__stats">
+          <div><strong data-count="14" data-suffix=" ha">0</strong><span>por hora de operación</span></div>
+          <div><strong>±10<span class="u">cm</span></strong><span>precisión RTK</span></div>
+          <div><strong>16<span class="u">L</span></strong><span>estanque de mezcla</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENEFICIOS ===== -->
+<section class="section beneficios" id="beneficios">
+  <div class="container">
+    <div class="section__head section__head--center reveal">
+      <span class="eyebrow">Por qué con dron</span>
+      <h2>La misma aplicación, sin pisar el cultivo ni esperar que seque el potrero.</h2>
+    </div>
+
+    <div class="cards cards--3">
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>14 hectáreas por hora</h3>
+        <p>Una jornada de dron cubre lo que a un equipo terrestre le toma varios días. Aprovechas la ventana de aplicación cuando el cultivo la necesita, no cuando el potrero deja entrar la maquinaria.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8" opacity=".55"/><path d="M12 1.5v3.5m0 14v3.5M1.5 12H5m14 0h3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Precisión RTK y tasa variable</h3>
+        <p>El dron vuela con corrección RTK de ±10 cm y regula el caudal según la velocidad real. No hay traslapes ni franjas sin tratar: aplicas solo lo necesario y ahorras insumos.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19c3-8 7-8 9-4s5 2 9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6 21c0-4 2.5-6 6-6s6 2 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".5"/></svg>
+        </div>
+        <h3>Llega donde la maquinaria no</h3>
+        <p>Laderas, suelos saturados, plantaciones cerradas y terrenos de difícil acceso. El dron no compacta el suelo, no rompe plantas y no depende de que el terreno esté firme.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c0-5 2-8 6-9-1 5-3 7-6 9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 21c0-5-2-8-6-9 1 5 3 7 6 9Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 21v-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Siembra aérea uniforme</h3>
+        <p>Siembra de praderas y cultivos de cobertura con distribución pareja sobre toda la superficie, incluidos los sectores que la sembradora no alcanza.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-4.6 7-10.4A7 7 0 0 0 5 11.6C5 17.4 12 22 12 22Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Sin pisadas ni compactación</h3>
+        <p>Al no entrar al potrero, no quedan huellas de rodado ni plantas quebradas. En viñedos y frutales evitas el daño de la barra sobre la hilera.</p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18M8 5V3m8 2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 14h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Registro de cada aplicación</h3>
+        <p>Cada vuelo queda con su mapa, superficie tratada, dosis y fecha. Te entregamos el registro para tu control interno y para cualquier requerimiento de trazabilidad.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICIOS ===== -->
+<section class="section servicios" id="servicios">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>Dos operaciones, un mismo equipo en terreno.</h2>
+      <p class="section__sub">Trabajamos por hectárea, con visita técnica previa sin costo para evaluar el terreno y definir los parámetros de vuelo.</p>
+    </div>
+
+    <div class="servicios__grid">
+      <article class="servicio reveal">
+        <div class="servicio__tag">01</div>
+        <h3>Fumigación y pulverización</h3>
+        <p>Aplicación de fitosanitarios, fertilizantes foliares y bioestimulantes con cuatro boquillas rotativas de atomización. El tamaño de gota se ajusta entre 90 y 300 micrones según el producto y la condición del día.</p>
+        <ul class="servicio__list">
+          <li><strong>Ancho de aplicación</strong> 2 a 6 m según altura y dosis</li>
+          <li><strong>Caudal</strong> hasta 5,6 L/min con las cuatro bombas</li>
+          <li><strong>Tasa variable</strong> el caudal sigue la velocidad real de vuelo</li>
+          <li><strong>Estanque</strong> 16 L con medición de flujo de alta precisión</li>
+        </ul>
+      </article>
+
+      <article class="servicio reveal">
+        <div class="servicio__tag">02</div>
+        <h3>Siembra aérea</h3>
+        <p>Siembra de praderas, cultivos de cobertura y resiembra sobre superficie establecida. La distribución aérea permite cubrir sectores irregulares, con pendiente o sin acceso para maquinaria.</p>
+        <ul class="servicio__list">
+          <li><strong>Praderas</strong> siembra y resiembra pareja en toda la superficie</li>
+          <li><strong>Pendientes</strong> cobertura de laderas sin riesgo de vuelco</li>
+          <li><strong>Sin preparación</strong> no requiere que el potrero esté transitable</li>
+          <li><strong>Planificación 3D</strong> la ruta sigue el relieve real del terreno</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="nota reveal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6m0-9.5v.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <p>La aplicación de fitosanitarios se realiza siguiendo la etiqueta del producto y la normativa vigente del SAG. En la visita técnica revisamos las condiciones del predio, las zonas de exclusión y los tiempos de reingreso antes de programar el vuelo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EQUIPO ===== -->
+<section class="section equipo" id="equipo">
+  <div class="container equipo__inner">
+    <div class="equipo__copy reveal">
+      <span class="eyebrow">El equipo</span>
+      <h2>XAG P30, un equipo agrícola profesional.</h2>
+      <p>No es un dron de fotografía adaptado. El P30 es maquinaria agrícola aérea diseñada para pulverización: estructura sellada IP67, doble antena RTK, radar de terreno y evasión de obstáculos, con planificación de ruta en tres dimensiones que sigue el relieve del potrero.</p>
+      <p>El operador cuenta con instrucción teórica y práctica certificada para los modelos P30 y XP, y cada vuelo se ejecuta con lista de chequeo previa y posterior.</p>
+      <div class="equipo__badges">
+        <span>Operador con instrucción certificada</span>
+        <span>Checklist pre y post vuelo</span>
+        <span>Doble RTK con respaldo GNSS</span>
+      </div>
+    </div>
+
+    <div class="specs reveal">
+      <div class="spec"><strong>14 ha/h</strong><span>Rendimiento operativo</span></div>
+      <div class="spec"><strong>±10 cm</strong><span>Precisión de vuelo con RTK</span></div>
+      <div class="spec"><strong>16 L</strong><span>Capacidad del estanque</span></div>
+      <div class="spec"><strong>2 – 6 m</strong><span>Ancho efectivo de aplicación</span></div>
+      <div class="spec"><strong>90 – 300 μm</strong><span>Tamaño de gota regulable</span></div>
+      <div class="spec"><strong>5,6 L/min</strong><span>Caudal máximo de pulverización</span></div>
+      <div class="spec"><strong>IP67</strong><span>Grado de protección del equipo</span></div>
+      <div class="spec"><strong>4 boquillas</strong><span>Rotativas de atomización</span></div>
+      <div class="spec"><strong>1,5 – 20 m</strong><span>Rango de detección de obstáculos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CULTIVOS ===== -->
+<section class="section cultivos" id="cultivos">
+  <div class="container">
+    <div class="section__head section__head--center reveal">
+      <span class="eyebrow">Aplicaciones</span>
+      <h2>Pensado para lo que se cultiva en la zona.</h2>
+      <p class="section__sub">Estos son los sistemas productivos donde el dron rinde mejor en Ñuble y Biobío.</p>
+    </div>
+
+    <div class="cultivos__grid">
+      <article class="cultivo reveal">
+        <div class="cultivo__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="10" r="2.1" fill="currentColor"/><circle cx="15" cy="10" r="2.1" fill="currentColor"/><circle cx="12" cy="14" r="2.1" fill="currentColor"/><circle cx="8" cy="17" r="2.1" fill="currentColor"/><circle cx="16" cy="17" r="2.1" fill="currentColor"/></svg>
+        </div>
+        <h3>Viñedos</h3>
+        <p>Aplicación sobre la hilera sin que la barra roce el follaje ni el rodado compacte la entrehilera.</p>
+      </article>
+
+      <article class="cultivo reveal">
+        <div class="cultivo__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 9c0-3 2-5 4-5 0 3-2 5-4 5Zm0 0c0-3-2-5-4-5 0 3 2 5 4 5Zm0 5c0-2.6 1.8-4.4 3.6-4.4 0 2.6-1.8 4.4-3.6 4.4Zm0 0c0-2.6-1.8-4.4-3.6-4.4 0 2.6 1.8 4.4 3.6 4.4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Trigo y avena</h3>
+        <p>Fungicidas e insecticidas en el momento justo, sin esperar a que el suelo soporte el peso del equipo.</p>
+      </article>
+
+      <article class="cultivo reveal">
+        <div class="cultivo__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c2-6 4-8 4-8s2 2 4 8m0 0c2-6 4-8 4-8s2 2 4 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Praderas</h3>
+        <p>Siembra, resiembra y fertilización foliar sobre superficies extensas o con pendiente pronunciada.</p>
+      </article>
+
+      <article class="cultivo reveal">
+        <div class="cultivo__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 7 10h3l-4 7h5v5h2v-5h5l-4-7h3L12 2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Plantaciones forestales</h3>
+        <p>Control en superficies con pendiente y acceso restringido, donde entrar con maquinaria no es viable.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESO ===== -->
+<section class="section proceso" id="proceso">
+  <div class="container">
+    <div class="section__head section__head--center reveal">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>Tres pasos desde el mensaje hasta el vuelo.</h2>
+    </div>
+
+    <ol class="steps steps--3">
+      <li class="step reveal">
+        <span class="step__num">01</span>
+        <h3>Nos escribes por WhatsApp</h3>
+        <p>Cuéntanos qué necesitas aplicar o sembrar, la superficie aproximada y dónde queda el predio. Te respondemos con una primera estimación.</p>
+        <span class="step__meta">Respuesta el mismo día</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">02</span>
+        <h3>Visita técnica sin costo</h3>
+        <p>Vamos al predio a revisar el terreno, los accesos, los obstáculos y las zonas de exclusión. Con eso armamos la cotización definitiva por hectárea.</p>
+        <span class="step__meta">Sin compromiso</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">03</span>
+        <h3>Programamos tu aplicación</h3>
+        <p>Coordinamos la fecha según la ventana del cultivo y la condición de viento. Ejecutamos el vuelo y te entregamos el registro de la aplicación.</p>
+        <span class="step__meta">Fecha coordinada contigo</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== COBERTURA ===== -->
+<section class="section cobertura" id="cobertura">
+  <div class="container cobertura__inner">
+    <div class="cobertura__copy reveal">
+      <span class="eyebrow eyebrow--light">Zona de operación</span>
+      <h2>Región de Ñuble y Región del Biobío.</h2>
+      <p>Operamos en toda la zona y sus alrededores. Si tu predio queda fuera de las comunas listadas, escríbenos igual: según la superficie y la fecha podemos coordinar el traslado.</p>
+
+      <div class="comunas">
+        <span>Los Ángeles</span><span>Chillán</span><span>San Carlos</span>
+        <span>Bulnes</span><span>Yungay</span><span>Coihueco</span>
+        <span class="comunas__mas">y alrededores</span>
+      </div>
+    </div>
+
+    <div class="precio reveal">
+      <span class="precio__tag">Descuento de lanzamiento</span>
+      <p class="precio__label">Cotizaciones desde</p>
+      <p class="precio__valor">$18.000<span>/ha</span></p>
+      <p class="precio__nota">Valor referencial en pesos chilenos. El precio final depende de la superficie, el tipo de aplicación y las condiciones del terreno.</p>
+
+      <ul class="precio__list">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Visita técnica sin costo</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Cotización gratuita y sin compromiso</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Descuento especial hasta el 30/09/2026</li>
+      </ul>
+
+      <a href="#contacto" class="btn btn--wsp btn--block" data-wsp>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
+        Pedir mi cotización
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section class="section contacto" id="contacto">
+  <div class="container contacto__inner">
+    <div class="contacto__copy reveal">
+      <span class="eyebrow">Contacto</span>
+      <h2>Cuéntanos de tu predio.</h2>
+      <p>Completa el formulario y se abre WhatsApp con el mensaje ya escrito, listo para enviar. También puedes escribirnos directo por cualquiera de estas vías.</p>
+
+      <div class="vias">
+        <a class="via" href="https://wa.me/56974240110" target="_blank" rel="noopener">
+          <span class="via__icon via__icon--wsp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
+          </span>
+          <span class="via__texto"><strong>WhatsApp</strong><span>+56 9 7424 0110</span></span>
+        </a>
+
+        <a class="via" href="mailto:aeroingenia@gmail.com">
+          <span class="via__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="via__texto"><strong>Correo</strong><span>aeroingenia@gmail.com</span></span>
+        </a>
+
+        <a class="via" href="https://instagram.com/aeroingenia" target="_blank" rel="noopener">
+          <span class="via__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>
+          </span>
+          <span class="via__texto"><strong>Instagram</strong><span>@aeroingenia</span></span>
+        </a>
+      </div>
+    </div>
+
+    <form class="form reveal" id="contactForm" novalidate>
+      <div class="form__row">
+        <label class="field">
+          <span>Nombre</span>
+          <input type="text" name="nombre" required placeholder="Tu nombre">
+          <em class="field__error"></em>
+        </label>
+        <label class="field">
+          <span>Comuna</span>
+          <input type="text" name="comuna" required placeholder="Ej: Coihueco">
+          <em class="field__error"></em>
+        </label>
+      </div>
+
+      <div class="form__row">
+        <label class="field">
+          <span>Servicio</span>
+          <select name="servicio" required>
+            <option value="">¿Qué necesitas?</option>
+            <option>Fumigación / pulverización</option>
+            <option>Siembra aérea</option>
+            <option>Ambos</option>
+            <option>Todavía no lo tengo claro</option>
+          </select>
+          <em class="field__error"></em>
+        </label>
+        <label class="field">
+          <span>Superficie aproximada</span>
+          <select name="superficie" required>
+            <option value="">Elige un rango</option>
+            <option>Menos de 5 ha</option>
+            <option>5 – 20 ha</option>
+            <option>20 – 50 ha</option>
+            <option>50 – 100 ha</option>
+            <option>Más de 100 ha</option>
+          </select>
+          <em class="field__error"></em>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Cultivo y detalle <em class="opt">(opcional)</em></span>
+        <textarea name="mensaje" rows="3" placeholder="Ej: 12 ha de trigo en Bulnes, necesito aplicación de fungicida esta semana."></textarea>
+      </label>
+
+      <button type="submit" class="btn btn--wsp btn--lg btn--block">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
+        Enviar por WhatsApp
+      </button>
+
+      <p class="form__note">Se abre WhatsApp con el mensaje redactado. Tú decides si lo envías.</p>
+      <p class="form__success" id="formSuccess" role="status" hidden>
+        Abrimos WhatsApp en otra pestaña con tu mensaje listo. Si no se abrió, escríbenos directo al +56 9 7424 0110.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="#inicio" class="logo logo--footer">
+        <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#0d2117"/>
+          <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="32" cy="32" r="24.5" fill="none" stroke="currentColor" stroke-width="1" opacity=".55"/>
+          <path d="M18 18 32 32 46 18M18 46 32 32 46 46" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="17" cy="17" r="5" fill="#fff"/><circle cx="47" cy="17" r="5" fill="#fff"/>
+          <circle cx="17" cy="47" r="5" fill="#fff"/><circle cx="47" cy="47" r="5" fill="#fff"/>
+          <path d="M32 22c5 5 5 15 0 20-5-5-5-15 0-20Z" fill="currentColor"/>
+        </svg>
+        <span class="logo__text">Aero<strong>Ingenia</strong><em>Ingeniería agrícola de precisión</em></span>
+      </a>
+      <p>Fumigación y siembra con drones en las regiones de Ñuble y Biobío, Chile.</p>
+    </div>
+
+    <nav class="footer__col">
+      <h4>Servicios</h4>
+      <a href="#servicios">Fumigación con drones</a>
+      <a href="#servicios">Siembra aérea</a>
+      <a href="#equipo">Equipo XAG P30</a>
+      <a href="#cultivos">Cultivos que atendemos</a>
+    </nav>
+
+    <nav class="footer__col">
+      <h4>Información</h4>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#cobertura">Zona de operación</a>
+      <a href="#cobertura">Precios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="footer__col">
+      <h4>Escríbenos</h4>
+      <a href="https://wa.me/56974240110" target="_blank" rel="noopener">WhatsApp +56 9 7424 0110</a>
+      <a href="mailto:aeroingenia@gmail.com">aeroingenia@gmail.com</a>
+      <a href="https://instagram.com/aeroingenia" target="_blank" rel="noopener">@aeroingenia</a>
+      <p class="footer__addr">Región de Ñuble y Biobío<br>Chile</p>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© 2026 AeroIngenia. Todos los derechos reservados.</p>
+    <p class="footer__legal">Aplicaciones realizadas conforme a la normativa vigente del SAG.</p>
+  </div>
+</footer>
+
+<!-- Botón flotante de WhatsApp -->
+<a class="wsp-float" href="https://wa.me/56974240110" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp a AeroIngenia">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

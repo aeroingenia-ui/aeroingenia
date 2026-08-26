@@ -1,0 +1,21 @@
+# Documentación interna — NO debe quedar pública en el sitio
+guia p30 dron.pdf
+Proceso de operatividad XAG P30.pdf
+aeroingenia_logo_icono.pdf
+
+# Versión anterior de la página
+.backup/
+
+# Configuración de herramientas, ajena al sitio
+agents/
+skills/
+.claude/
+
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Vercel
+.vercel/
