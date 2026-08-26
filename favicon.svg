@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AeroIngenia">
+  <!-- Isotipo simplificado para favicon. A 16 px los brazos en X del
+       logo original se empastan con los rotores, así que acá se omiten:
+       quedan los cuatro rotores y la semilla, que a ese tamaño siguen
+       leyéndose separados. -->
+  <circle cx="32" cy="32" r="32" fill="#0d2117"/>
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#d8a02a" stroke-width="4"/>
+  <circle cx="19" cy="19" r="7.5" fill="#ffffff"/>
+  <circle cx="45" cy="19" r="7.5" fill="#ffffff"/>
+  <circle cx="19" cy="45" r="7.5" fill="#ffffff"/>
+  <circle cx="45" cy="45" r="7.5" fill="#ffffff"/>
+  <path d="M32 19c5.6 6 5.6 20 0 26-5.6-6-5.6-20 0-26Z" fill="#d8a02a"/>
+</svg>
