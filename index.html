@@ -72,6 +72,15 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="inicio">
+  <div class="hero__media" aria-hidden="true">
+    <!-- El src lo pone script.js: así no se descarga en conexiones lentas
+         ni cuando el visitante pidió menos animación. Mientras tanto se
+         ve el poster, que pesa 38 KB. -->
+    <video class="hero__video" id="heroVideo"
+           poster="hero-dron.jpg" data-src="hero-dron.mp4"
+           muted loop playsinline preload="none"></video>
+    <div class="hero__veil"></div>
+  </div>
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__copy">

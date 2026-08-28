@@ -19,3 +19,7 @@ desktop.ini
 
 # Vercel
 .vercel/
+
+# Video original del dron (166 MB) — solo se sube la versión comprimida
+*.MOV
+*.mov

@@ -101,6 +101,29 @@
   });
 
   /* ------------------------------------------
+     3b. Video de fondo del hero
+         Se descarga solo si vale la pena: no en
+         conexiones lentas, no con ahorro de datos
+         activado, no si pidieron menos animación.
+         En esos casos queda el poster, que ya se
+         ve sin descargar nada extra.
+  ------------------------------------------ */
+  var heroVideo = document.getElementById('heroVideo');
+  if (heroVideo) {
+    var con = navigator.connection || {};
+    var conexionPobre = con.saveData === true ||
+                        /(^|-)2g$/.test(con.effectiveType || '');
+
+    if (!reduceMotion && !conexionPobre) {
+      heroVideo.src = heroVideo.dataset.src;
+      // Algunos navegadores rechazan la promesa si la pestaña está en
+      // segundo plano; el poster cubre ese caso, así que no hace falta avisar.
+      var intento = heroVideo.play();
+      if (intento && intento.catch) intento.catch(function () {});
+    }
+  }
+
+  /* ------------------------------------------
      4. Aparición de bloques al entrar en pantalla
   ------------------------------------------ */
   var bloques = document.querySelectorAll('.reveal');
