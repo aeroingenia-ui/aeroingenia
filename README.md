@@ -28,7 +28,7 @@ Sin dependencias, sin build: se abre directo en el navegador con doble clic en `
 | Carpeta | Qué contiene |
 |---------|--------------|
 | `contexto-aeroingenia/` | Modelo de negocio, mercado/precios e identidad visual del proyecto AeroIngenia, traídos del proyecto madre para que quien edite esta landing no tenga que abrir el otro repo |
-| `agents/` | Copia de referencia de los 6 agentes especializados del proyecto AeroIngenia (agronomía, marketing, evaluación comercial, ingeniería comercial, desarrollo web, QA). Documentación, no agentes activos de Claude Code (no están en `.claude/`) |
+| `agents/` | Copia de referencia de los 7 agentes especializados del proyecto AeroIngenia (agronomía, marketing, evaluación comercial, ingeniería comercial, desarrollo web, QA, audiovisual). Documentación, no agentes activos de Claude Code (no están en `.claude/`) |
 | `skills/` | Copia de las habilidades (`anthropics/skills`) que usan esos agentes |
 | `tramites/` | Investigación de habilitaciones regulatorias (DGAC, SAG, SEREMI de Salud) para operar legalmente lo que este sitio ofrece |
 
