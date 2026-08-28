@@ -7,7 +7,6 @@ aeroingenia_logo_icono.pdf
 .backup/
 
 # Configuración de herramientas, ajena al sitio
-agents/
 skills/
 .claude/
 

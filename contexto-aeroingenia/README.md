@@ -17,17 +17,17 @@ revés.
 | `mercado-y-precios.md` | Cómo se forma el precio en el mercado chileno de aplicación con dron, y una tensión sin resolver con el precio publicado en este sitio |
 | `identidad-visual-marca-madre.md` | Paleta/tipografía oficial del proyecto madre — **distinta** de la que usa `styles.css` hoy. No se tocó el sitio; queda como nota |
 
-## Sobre `agents/` y `skills/`
+## Sobre los agentes y `skills/`
 
-Son copias de referencia de los agentes especializados y las habilidades que usa el
-proyecto AeroIngenia (agronomía, marketing, evaluación comercial, ingeniería comercial,
-desarrollo web, QA de coherencia). Documentan **cómo se construyó** el contenido de esta
-landing y sirven de referencia si hay que revisar o ampliar algo con el mismo criterio.
+Los 7 agentes especializados viven en `.claude/agents/` y **son agentes activos de Claude
+Code**: se descubren al iniciar la sesión y se invocan por nombre. Cubren agronomía,
+marketing, evaluación comercial, ingeniería comercial, desarrollo web, QA de coherencia
+y diseño audiovisual.
 
-Ojo: están en `agents/` y `skills/`, no en `.claude/agents/` y `.claude/skills/` — por eso
-son solo documentación, no agentes activos de Claude Code dentro de este repositorio. Si
-en algún momento se quiere poder invocarlos directamente trabajando en esta carpeta, hay
-que moverlos a `.claude/`. No lo hice porque no fue lo pedido, pero queda como opción.
+La carpeta duplicada `agents/`, que solo servía de documentación, se eliminó: tener dos
+copias del mismo archivo garantiza que tarde o temprano se edite la que no corresponde.
+
+`skills/` sigue siendo copia de referencia de las habilidades que usan esos agentes.
 
 ## Mantenimiento
 
