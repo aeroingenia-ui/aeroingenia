@@ -175,3 +175,19 @@ volver, minutos reales de recarga, y minutos de cambio de batería + recarga de 
 - **No publicar cerezo**: su programa es de 50–100 L/ha, más de 3 recargas por hectárea con estanque de 16 L
 - Publicar el mínimo como **"equivalente a 5 hectáreas por salida"**, en hectáreas y no en pesos
 - Usar el vencimiento del descuento (30/09/2026) para resetear el ancla a **"desde $22.000/ha a 15 L/ha"**
+
+## Al editar `styles.css` o `script.js`: subí el número de versión
+
+En `index.html` los dos archivos se enlazan con una versión en la URL:
+
+```html
+<link rel="stylesheet" href="styles.css?v=20260828">
+<script src="script.js?v=20260828"></script>
+```
+
+**Cambiá ese número cada vez que edites el CSS o el JS.** Si no, los
+navegadores que ya visitaron el sitio siguen usando la copia guardada y
+no ven el cambio — pasó de verdad: un despliegue quedó sirviendo el HTML
+nuevo con el JavaScript viejo, y el video del hero nunca cargaba.
+
+Usá la fecha del día (`?v=20260901`) y listo.
