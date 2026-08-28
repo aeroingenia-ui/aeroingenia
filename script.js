@@ -110,14 +110,17 @@
   ------------------------------------------ */
   var heroVideo = document.getElementById('heroVideo');
   if (heroVideo) {
-    var con = navigator.connection || {};
-    var conexionPobre = con.saveData === true ||
-                        /(^|-)2g$/.test(con.effectiveType || '');
+    // Solo miramos saveData: es una preferencia explícita y estable.
+    // effectiveType NO sirve acá — durante la carga inicial Chrome todavía
+    // no tiene muestras y devuelve "2g" aunque la conexión sea buena, así
+    // que descartaba el video en conexiones perfectamente capaces.
+    var ahorroDatos = (navigator.connection || {}).saveData === true;
 
-    if (!reduceMotion && !conexionPobre) {
+    if (!reduceMotion && !ahorroDatos) {
       heroVideo.src = heroVideo.dataset.src;
-      // Algunos navegadores rechazan la promesa si la pestaña está en
-      // segundo plano; el poster cubre ese caso, así que no hace falta avisar.
+      // La promesa se rechaza si la pestaña está en segundo plano o si el
+      // navegador pausa el video de fondo para ahorrar batería. En esos
+      // casos queda el poster, que es exactamente lo que corresponde.
       var intento = heroVideo.play();
       if (intento && intento.catch) intento.catch(function () {});
     }
