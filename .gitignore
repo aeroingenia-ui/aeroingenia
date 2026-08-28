@@ -9,7 +9,8 @@ aeroingenia_logo_icono.pdf
 # Configuración de herramientas, ajena al sitio
 agents/
 skills/
-.claude/
+.claude/*
+!.claude/agents/
 
 
 # Sistema
