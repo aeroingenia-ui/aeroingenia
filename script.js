@@ -6,7 +6,20 @@
 
   /* Datos de contacto en un solo lugar */
   var WSP = '56974240110';
-  var MENSAJE_BASE = 'Hola AeroIngenia 👋 Quiero cotizar una aplicación con dron.';
+
+  /* Plantilla para quien entra directo al chat sin pasar por el formulario.
+     Lleva las mismas preguntas que el formulario, para que la persona las
+     complete en WhatsApp y no haya que pedirle los datos de a uno.
+     Los asteriscos los renderiza WhatsApp como negrita. */
+  var MENSAJE_BASE = [
+    'Hola AeroIngenia 👋 Quiero cotizar una aplicación con dron.',
+    '',
+    '*Nombre:*',
+    '*Comuna del predio:*',
+    '*Servicio:* (fumigación / siembra aérea / ambos)',
+    '*Superficie aproximada:*',
+    '*Cultivo:*'
+  ].join('\n');
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
