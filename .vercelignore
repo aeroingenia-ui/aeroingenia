@@ -21,6 +21,12 @@ desktop.ini
 # Documentos de tramitación — no se publican
 tramites/
 
+# Contexto interno del proyecto — modelo de negocio, precios y estructura de costos
+contexto-aeroingenia/
+
 # Video original del dron (166 MB) — solo se sube la versión comprimida
 *.MOV
 *.mov
+
+# Documentación operativa interna — no se publica
+operacion/

@@ -19,10 +19,15 @@ revés.
 
 ## Sobre los agentes y `skills/`
 
-Los 7 agentes especializados viven en `.claude/agents/` y **son agentes activos de Claude
+Los 8 agentes especializados viven en `.claude/agents/` y **son agentes activos de Claude
 Code**: se descubren al iniciar la sesión y se invocan por nombre. Cubren agronomía,
-marketing, evaluación comercial, ingeniería comercial, desarrollo web, QA de coherencia
-y diseño audiovisual.
+robótica, marketing, evaluación comercial, ingeniería comercial, desarrollo web, QA de
+coherencia y diseño audiovisual.
+
+`robotics-engineer` es el más nuevo (2026-08-28) y es el responsable técnico del salto a
+la capa 2: sensores multiespectrales, cómputo a bordo, cadena de datos índice→app y qué
+se compra integrado vs. qué se desarrolla. Como los agentes se descubren al iniciar
+sesión, hay que reiniciar Claude Code una vez para poder invocarlo por nombre.
 
 La carpeta duplicada `agents/`, que solo servía de documentación, se eliminó: tener dos
 copias del mismo archivo garantiza que tarde o temprano se edite la que no corresponde.
