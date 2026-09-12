@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260828">
+<link rel="stylesheet" href="styles.css?v=20260912">
 </head>
 <body>
 
@@ -58,6 +58,41 @@
       <a href="#cultivos">Cultivos</a>
       <a href="#proceso">Cómo funciona</a>
       <a href="#cobertura">Cobertura</a>
+
+      <div class="nav__share" id="navShare">
+        <button type="button" class="nav__share-btn" id="navShareBtn" aria-haspopup="true" aria-expanded="false" aria-controls="navShareMenu" aria-label="Compartir AeroIngenia">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="2.6"></circle>
+            <circle cx="6" cy="12" r="2.6"></circle>
+            <circle cx="18" cy="19" r="2.6"></circle>
+            <line x1="8.3" y1="10.7" x2="15.7" y2="6.3"></line>
+            <line x1="8.3" y1="13.3" x2="15.7" y2="17.7"></line>
+          </svg>
+          <span class="nav__share-label">Compartir</span>
+        </button>
+        <div class="nav__share-menu" id="navShareMenu" role="menu" hidden>
+          <button type="button" class="nav__share-item" role="menuitem" data-share="whatsapp"><span class="nav__share-badge">WA</span> WhatsApp</button>
+          <button type="button" class="nav__share-item" role="menuitem" data-share="linkedin"><span class="nav__share-badge">in</span> LinkedIn</button>
+          <button type="button" class="nav__share-item" role="menuitem" data-share="facebook"><span class="nav__share-badge">f</span> Facebook</button>
+          <button type="button" class="nav__share-item" role="menuitem" data-share="x"><span class="nav__share-badge">X</span> X</button>
+          <button type="button" class="nav__share-item" role="menuitem" data-share="telegram"><span class="nav__share-badge">TG</span> Telegram</button>
+          <button type="button" class="nav__share-item" role="menuitem" data-share="instagram">
+            <span class="nav__share-badge">IG</span>
+            <span class="nav__share-copy-label">Instagram</span>
+          </button>
+          <button type="button" class="nav__share-item" role="menuitem" data-share="copy">
+            <span class="nav__share-badge">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9.5 14.5 14.5 9.5"></path>
+                <path d="M11 7l1.5-1.5a3.2 3.2 0 0 1 4.5 4.5L15.5 11.5"></path>
+                <path d="M13 17l-1.5 1.5a3.2 3.2 0 0 1-4.5-4.5L8.5 12.5"></path>
+              </svg>
+            </span>
+            <span class="nav__share-copy-label">Copiar enlace</span>
+          </button>
+        </div>
+      </div>
+
       <a href="#contacto" class="btn btn--sm btn--wsp nav__cta">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
         Cotizar
@@ -513,6 +548,6 @@
   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.13c-.25.69-1.43 1.32-1.98 1.4-.53.08-1.19.11-1.92-.12-.44-.14-1.01-.33-1.74-.64-3.06-1.32-5.06-4.4-5.21-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.7.68.52.25.6.83 2.07.9 2.22.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.61.17.3.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.36 1.46.3.15.47.13.65-.08.17-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.74-.18 1.43Z"/></svg>
 </a>
 
-<script src="script.js?v=20260828"></script>
+<script src="script.js?v=20260912"></script>
 </body>
 </html>

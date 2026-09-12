@@ -113,6 +113,14 @@ a SVG o PNG con fondo transparente y reemplazá el bloque `<svg class="logo__mar
   con el mensaje ya redactado. El usuario decide si lo envía.
 - La grilla de vuelo del hero se genera en `script.js` con pasadas alternadas,
   igual que la ruta que arma la app XAG sobre el potrero
+- Botón "Compartir" en el nav (ícono junto a "Cotizar", y como fila completa en el menú
+  mobile): abre WhatsApp, LinkedIn, Facebook, X o Telegram con el enlace precargado, o
+  copia el enlace; si el navegador soporta `navigator.share` suma también la opción del
+  sistema. Usa la URL donde esté abierta la página, así que solo sirve una vez publicado
+  el sitio. **Instagram es un caso aparte**: no tiene una URL pública que reciba un link
+  precargado, así que ese botón copia el texto al portapapeles, abre el perfil
+  `@aeroingenia` y avisa "pégalo en tu historia" — es lo más cerca de "compartir" que
+  permite Instagram desde la web.
 
 ## Rendimiento real — por qué el sitio ya no promete 14 ha/h
 

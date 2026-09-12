@@ -276,4 +276,250 @@
   ------------------------------------------ */
   var copy = document.querySelector('.footer__bottom p');
   if (copy) copy.textContent = '© ' + new Date().getFullYear() + ' AeroIngenia. Todos los derechos reservados.';
+
+  /* ------------------------------------------
+     9. Compartir (nav)
+  ------------------------------------------ */
+  var shareRoot = document.getElementById('navShare');
+  if (shareRoot) {
+    var shareBtn = document.getElementById('navShareBtn');
+    var shareMenu = document.getElementById('navShareMenu');
+    var shareText = 'AeroIngenia — fumigación y siembra de precisión con drones en Ñuble y Biobío. Cotizaciones desde $18.000/ha.';
+
+    var shareUrl = function () { return window.location.href; };
+    var shareOpenPopup = function (url) { window.open(url, '_blank', 'noopener,noreferrer,width=640,height=640'); };
+    var shareCloseMenu = function () { shareMenu.hidden = true; shareBtn.setAttribute('aria-expanded', 'false'); };
+    var shareOpenMenu = function () { shareMenu.hidden = false; shareBtn.setAttribute('aria-expanded', 'true'); };
+
+    shareBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (shareMenu.hidden) shareOpenMenu(); else shareCloseMenu();
+    });
+    document.addEventListener('click', function (e) { if (!shareRoot.contains(e.target)) shareCloseMenu(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') shareCloseMenu(); });
+
+    // Copia texto al portapapeles y muestra feedback inline en el propio item.
+    // Instagram no tiene una URL de "compartir" pública como las demás redes
+    // (no acepta un link con texto precargado), así que la forma honesta de
+    // resolverlo es copiar el enlace y llevar a la persona a la app para que
+    // lo pegue ella misma en su historia o publicación.
+    var shareCopyText = function (texto, item, opts) {
+      opts = opts || {};
+      var label = item.querySelector('.nav__share-copy-label');
+      var revert = opts.revert || 'Copiar enlace';
+      var listo = function (ok) {
+        if (label) label.textContent = ok ? (opts.done || '¡Enlace copiado!') : 'No se pudo copiar';
+        setTimeout(function () { if (label) label.textContent = revert; shareCloseMenu(); }, opts.holdMs || 1600);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(texto).then(function () { listo(true); }, function () { listo(false); });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = texto;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+        document.body.removeChild(ta);
+        listo(ok);
+      }
+    };
+
+    // Instagram no acepta un link precargado: lo único que puede recibir
+    // desde afuera es un archivo (imagen o video) que el celular entrega
+    // a la app para publicar en Historia, Reel o Feed. Armamos ese video
+    // al vuelo: se dibuja cada cuadro del propio video del hero en un
+    // <canvas> vertical 1080×1920, con el logo, el titular y el precio
+    // superpuestos, y se graba con MediaRecorder. Si el navegador no
+    // soporta compartir archivos (la mayoría de los de escritorio) o algo
+    // falla en el camino, cae al respaldo: copia el texto y abre el perfil.
+    //
+    // OJO con navigator.share(): los navegadores solo lo permiten dentro
+    // del mismo gesto del usuario (un clic), y grabar el video tarda varios
+    // segundos — para cuando el video está listo, ese gesto ya expiró y
+    // share() sería rechazado en silencio. Por eso son dos toques: el
+    // primero prepara el archivo, el segundo (ya con el archivo listo)
+    // dispara el share() de forma síncrona dentro de ese nuevo clic.
+    var instagramListo = null; // File ya grabado, esperando el segundo toque
+    var instagramPreparando = false;
+
+    var shareInstagramFallback = function (item) {
+      instagramListo = null;
+      instagramPreparando = false;
+      shareOpenPopup('https://instagram.com/aeroingenia');
+      shareCopyText(shareText + ' ' + shareUrl(), item, { revert: 'Instagram', done: '¡Copiado! Pégalo en tu historia', holdMs: 2400 });
+    };
+
+    var puedeCompartirArchivos = function () {
+      if (!(navigator.canShare && navigator.share && window.MediaRecorder && window.File)) return false;
+      if (typeof HTMLCanvasElement.prototype.captureStream !== 'function') return false;
+      try { return navigator.canShare({ files: [new File(['x'], 'x.txt', { type: 'text/plain' })] }); }
+      catch (e) { return false; }
+    };
+
+    function envolverTexto(ctx, texto, x, y, anchoMax, alto) {
+      var palabras = texto.split(' ');
+      var linea = '';
+      var lineas = [];
+      for (var n = 0; n < palabras.length; n++) {
+        var prueba = linea + palabras[n] + ' ';
+        if (ctx.measureText(prueba).width > anchoMax && n > 0) { lineas.push(linea.trim()); linea = palabras[n] + ' '; }
+        else linea = prueba;
+      }
+      lineas.push(linea.trim());
+      lineas.forEach(function (l, i) { ctx.fillText(l, x, y + i * alto); });
+      return lineas.length;
+    }
+
+    var shareInstagramVideo = function (item) {
+      instagramPreparando = true;
+      var label = item.querySelector('.nav__share-copy-label');
+      if (label) label.textContent = 'Preparando video…';
+
+      var ANCHO = 1080, ALTO = 1920;
+      var origen = document.createElement('video');
+      origen.src = 'hero-dron.mp4';
+      origen.muted = true;
+      origen.playsInline = true;
+      origen.crossOrigin = 'anonymous';
+
+      var seCanceloTodo = false;
+      var cancelar = function () { seCanceloTodo = true; shareInstagramFallback(item); };
+      origen.addEventListener('error', cancelar);
+
+      origen.addEventListener('loadedmetadata', function () {
+        if (seCanceloTodo) return;
+        var duracionMs = Math.min(origen.duration || 8, 12) * 1000;
+
+        var canvas = document.createElement('canvas');
+        canvas.width = ANCHO; canvas.height = ALTO;
+        var ctx = canvas.getContext('2d');
+
+        var stream = canvas.captureStream(30);
+        var mime = 'video/webm;codecs=vp9';
+        if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm;codecs=vp8';
+        if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm';
+        var grabadora;
+        try { grabadora = new MediaRecorder(stream, { mimeType: mime }); }
+        catch (e) { cancelar(); return; }
+
+        var partes = [];
+        grabadora.ondataavailable = function (e) { if (e.data && e.data.size) partes.push(e.data); };
+
+        grabadora.onstop = function () {
+          instagramPreparando = false;
+          if (seCanceloTodo || !partes.length) { if (!seCanceloTodo) cancelar(); return; }
+          var blob = new Blob(partes, { type: mime.split(';')[0] });
+          var archivo = new File([blob], 'aeroingenia.webm', { type: blob.type });
+          if (!navigator.canShare({ files: [archivo] })) { cancelar(); return; }
+          // No llamamos a share() acá: ya no estamos dentro del clic del
+          // usuario. Dejamos el archivo listo y esperamos que toque de nuevo.
+          instagramListo = archivo;
+          if (label) label.textContent = 'Toca para compartir';
+        };
+
+        var raf = null;
+        function dibujar() {
+          var ev = origen.videoWidth, eh = origen.videoHeight;
+          var escala = Math.max(ANCHO / ev, ALTO / eh);
+          var dw = ev * escala, dh = eh * escala;
+          ctx.drawImage(origen, (ANCHO - dw) / 2, (ALTO - dh) / 2, dw, dh);
+
+          var velo = ctx.createLinearGradient(0, ALTO * 0.5, 0, ALTO);
+          velo.addColorStop(0, 'rgba(8,20,16,0)');
+          velo.addColorStop(1, 'rgba(8,20,16,.93)');
+          ctx.fillStyle = velo;
+          ctx.fillRect(0, 0, ANCHO, ALTO);
+
+          ctx.textBaseline = 'alphabetic';
+          ctx.fillStyle = '#e8b74a';
+          ctx.font = '600 44px "Space Grotesk", sans-serif';
+          ctx.fillText('AeroIngenia', 60, 110);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '700 62px "Space Grotesk", sans-serif';
+          var lineasTitular = envolverTexto(ctx, 'Aplicamos donde no entra el tractor.', 60, ALTO - 430, ANCHO - 120, 72);
+
+          ctx.fillStyle = '#d8a02a';
+          ctx.font = '600 38px "Space Grotesk", sans-serif';
+          ctx.fillText('Desde $18.000/ha · visita técnica sin costo', 60, ALTO - 430 + lineasTitular * 72 + 56);
+
+          ctx.fillStyle = 'rgba(255,255,255,.85)';
+          ctx.font = '500 32px Inter, sans-serif';
+          ctx.fillText('WhatsApp +56 9 7424 0110 · @aeroingenia', 60, ALTO - 90);
+
+          if (!origen.paused && !origen.ended) raf = requestAnimationFrame(dibujar);
+        }
+
+        origen.addEventListener('play', function () {
+          try { grabadora.start(); } catch (e) { cancelar(); return; }
+          dibujar();
+        }, { once: true });
+
+        var terminar = function () {
+          if (raf) cancelAnimationFrame(raf);
+          if (grabadora.state === 'recording') grabadora.stop();
+        };
+        origen.addEventListener('ended', terminar, { once: true });
+        setTimeout(function () { origen.pause(); terminar(); }, duracionMs + 300);
+
+        // Cargar las tipografías antes de dibujar el primer cuadro, si no
+        // el canvas usa la fuente de sistema en vez de la marca.
+        var fuentes = [
+          document.fonts.load('700 62px "Space Grotesk"'),
+          document.fonts.load('600 44px "Space Grotesk"'),
+          document.fonts.load('500 32px "Inter"')
+        ];
+        Promise.all(fuentes).catch(function () {}).then(function () {
+          if (seCanceloTodo) return;
+          origen.play().catch(cancelar);
+        });
+      }, { once: true });
+    };
+
+    shareMenu.addEventListener('click', function (e) {
+      var item = e.target.closest('[data-share]');
+      if (!item) return;
+      var url = shareUrl();
+      switch (item.getAttribute('data-share')) {
+        case 'whatsapp': shareOpenPopup('https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + url)); shareCloseMenu(); break;
+        case 'linkedin': shareOpenPopup('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url)); shareCloseMenu(); break;
+        case 'facebook': shareOpenPopup('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url)); shareCloseMenu(); break;
+        case 'x': shareOpenPopup('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(url)); shareCloseMenu(); break;
+        case 'telegram': shareOpenPopup('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(shareText)); shareCloseMenu(); break;
+        case 'instagram':
+          if (instagramListo) {
+            // Segundo toque: recién acá hay gesto fresco del usuario, es
+            // el único momento en que el navegador deja llamar a share().
+            var archivoListo = instagramListo;
+            instagramListo = null;
+            shareCloseMenu();
+            navigator.share({ files: [archivoListo], title: 'AeroIngenia', text: shareText }).catch(function () {});
+          } else if (instagramPreparando) {
+            break; // ya está grabando, un segundo clic mientras tanto no hace nada
+          } else if (puedeCompartirArchivos()) {
+            shareInstagramVideo(item);
+          } else {
+            shareInstagramFallback(item);
+          }
+          break;
+        case 'copy': shareCopyText(url, item, { revert: 'Copiar enlace' }); break;
+      }
+    });
+
+    if (navigator.share) {
+      var sysItem = document.createElement('button');
+      sysItem.type = 'button';
+      sysItem.className = 'nav__share-item';
+      sysItem.setAttribute('role', 'menuitem');
+      sysItem.innerHTML = '<span class="nav__share-badge">›</span> Más opciones del sistema';
+      sysItem.addEventListener('click', function () {
+        shareCloseMenu();
+        navigator.share({ title: document.title || 'AeroIngenia', text: shareText, url: shareUrl() }).catch(function () {});
+      });
+      shareMenu.insertBefore(sysItem, shareMenu.firstChild);
+    }
+  }
 })();
