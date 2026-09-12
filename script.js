@@ -373,6 +373,117 @@
       return lineas.length;
     }
 
+    // Las siguientes funciones recrean a mano, sobre el <canvas>, la
+    // portada real del sitio (pastilla, titular, botón, tarjeta del
+    // equipo con su grilla animada) para el video que se comparte a
+    // Instagram — no es una captura de pantalla (ver comentario más
+    // arriba sobre por qué eso no es viable en celular), sino el mismo
+    // diseño y las mismas animaciones, redibujadas cuadro a cuadro.
+    function trazarRectRedondeado(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    // Pastilla superior con el punto que titila — misma cadencia que
+    // @keyframes latido en styles.css (2.4 s, con un aro que crece y
+    // se desvanece en el primer 70% del ciclo).
+    function dibujarPill(ctx, x, y, texto, t) {
+      ctx.font = '500 30px Inter, sans-serif';
+      var padX = 28, dotR = 7, gap = 16, h = 62;
+      var w = padX * 2 + dotR * 2 + gap + ctx.measureText(texto).width;
+
+      ctx.fillStyle = 'rgba(216,160,42,.14)';
+      trazarRectRedondeado(ctx, x, y, w, h, h / 2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(216,160,42,.4)';
+      ctx.lineWidth = 2;
+      trazarRectRedondeado(ctx, x, y, w, h, h / 2);
+      ctx.stroke();
+
+      var cx = x + padX + dotR, cy = y + h / 2;
+      var ciclo = (t % 2400) / 2400;
+      var anillo = Math.min(ciclo / 0.7, 1);
+      ctx.beginPath();
+      ctx.arc(cx, cy, dotR + anillo * 11, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(216,160,42,' + (0.55 * (1 - anillo)).toFixed(3) + ')';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx, cy, dotR, 0, Math.PI * 2);
+      ctx.fillStyle = '#d8a02a';
+      ctx.fill();
+
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#e8b74a';
+      ctx.fillText(texto, x + padX * 2 + dotR * 2, cy + 1);
+      ctx.textBaseline = 'alphabetic';
+      return h;
+    }
+
+    function dibujarBotonWsp(ctx, x, y, texto) {
+      ctx.font = '600 34px "Space Grotesk", sans-serif';
+      var padX = 40, h = 92;
+      var w = padX * 2 + ctx.measureText(texto).width;
+
+      ctx.fillStyle = '#25d366';
+      trazarRectRedondeado(ctx, x, y, w, h, h / 2);
+      ctx.fill();
+
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#04331a';
+      ctx.fillText(texto, x + padX, y + h / 2 + 1);
+      ctx.textBaseline = 'alphabetic';
+      return h;
+    }
+
+    // La grilla de vuelo: 11 pasadas paralelas que aparecen una tras
+    // otra y se desvanecen, igual que @keyframes pasada en styles.css
+    // (5,4 s por línea, retraso escalonado de .26 s, alternando el
+    // lado desde el que "crecen" — la misma sensación de tejido).
+    function dibujarSwath(ctx, x, y, w, h, t) {
+      var n = 11, gap = 6;
+      var altoLinea = (h - gap * (n - 1)) / n;
+      var duracion = 5400, retraso = 260;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x, y, w, h);
+      ctx.clip();
+
+      var fondo = ctx.createRadialGradient(x + w * 0.3, y + h * 0.2, 0, x + w * 0.3, y + h * 0.2, w);
+      fondo.addColorStop(0, '#1e4a2e');
+      fondo.addColorStop(1, '#12301f');
+      ctx.fillStyle = fondo;
+      ctx.fillRect(x, y, w, h);
+
+      for (var i = 0; i < n; i++) {
+        var local = t - i * retraso;
+        if (local < 0) continue;
+        var ciclo = (local % duracion) / duracion;
+        var progreso, opacidad;
+        if (ciclo < 0.04) { progreso = 0; opacidad = 0.9; }
+        else if (ciclo < 0.42) { progreso = (ciclo - 0.04) / 0.38; opacidad = 0.9; }
+        else if (ciclo < 0.82) { progreso = 1; opacidad = 0.9 - (ciclo - 0.42) * 0.25; }
+        else { progreso = 1; opacidad = Math.max(0, 0.8 * (1 - (ciclo - 0.82) / 0.18)); }
+
+        var ly = y + i * (altoLinea + gap);
+        var anchoBarra = w * progreso;
+        var lx = (i % 2 === 1) ? x + w - anchoBarra : x;
+        if (anchoBarra < 1) continue;
+
+        var g = ctx.createLinearGradient(lx, 0, lx + anchoBarra, 0);
+        g.addColorStop(0, 'rgba(139,195,74,' + opacidad.toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(216,160,42,' + (opacidad * 0.7).toFixed(3) + ')');
+        ctx.fillStyle = g;
+        ctx.fillRect(lx, ly, anchoBarra, altoLinea);
+      }
+      ctx.restore();
+    }
+
     var shareInstagramVideo = function (item) {
       instagramPreparando = true;
       var label = item.querySelector('.nav__share-copy-label');
@@ -421,34 +532,99 @@
         };
 
         var raf = null;
-        function dibujar() {
+        var tInicio = null;
+        var MX = 64;
+        var CW = ANCHO - MX * 2;
+
+        function dibujar(marca) {
+          if (tInicio === null) tInicio = marca || performance.now();
+          var t = (marca || performance.now()) - tInicio;
+
           var ev = origen.videoWidth, eh = origen.videoHeight;
           var escala = Math.max(ANCHO / ev, ALTO / eh);
           var dw = ev * escala, dh = eh * escala;
           ctx.drawImage(origen, (ANCHO - dw) / 2, (ALTO - dh) / 2, dw, dh);
 
-          var velo = ctx.createLinearGradient(0, ALTO * 0.5, 0, ALTO);
-          velo.addColorStop(0, 'rgba(8,20,16,0)');
-          velo.addColorStop(1, 'rgba(8,20,16,.93)');
+          var velo = ctx.createLinearGradient(0, 0, 0, ALTO);
+          velo.addColorStop(0, 'rgba(13,33,23,.55)');
+          velo.addColorStop(0.45, 'rgba(13,33,23,.74)');
+          velo.addColorStop(1, 'rgba(8,20,16,.96)');
           ctx.fillStyle = velo;
           ctx.fillRect(0, 0, ANCHO, ALTO);
 
           ctx.textBaseline = 'alphabetic';
-          ctx.fillStyle = '#e8b74a';
+          var y = 160;
+
           ctx.font = '600 44px "Space Grotesk", sans-serif';
-          ctx.fillText('AeroIngenia', 60, 110);
+          ctx.fillStyle = '#e8b74a';
+          ctx.fillText('AeroIngenia', MX, y);
+          y += 96;
 
+          y += dibujarPill(ctx, MX, y, 'Fumigación y siembra con drones', t) + 56;
+
+          ctx.font = '700 72px "Space Grotesk", sans-serif';
           ctx.fillStyle = '#ffffff';
-          ctx.font = '700 62px "Space Grotesk", sans-serif';
-          var lineasTitular = envolverTexto(ctx, 'Aplicamos donde no entra el tractor.', 60, ALTO - 430, ANCHO - 120, 72);
+          ctx.fillText('Aplicamos donde', MX, y);
+          y += 86;
+          var texto2 = 'no entra el tractor.';
+          var gradTitular = ctx.createLinearGradient(MX, 0, MX + ctx.measureText(texto2).width, 0);
+          gradTitular.addColorStop(0, '#d8a02a');
+          gradTitular.addColorStop(1, '#8bc34a');
+          ctx.fillStyle = gradTitular;
+          ctx.fillText(texto2, MX, y);
+          y += 68;
 
-          ctx.fillStyle = '#d8a02a';
-          ctx.font = '600 38px "Space Grotesk", sans-serif';
-          ctx.fillText('Desde $18.000/ha · visita técnica sin costo', 60, ALTO - 430 + lineasTitular * 72 + 56);
+          ctx.font = '400 34px Inter, sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,.82)';
+          var nLineas = envolverTexto(ctx, 'Fumigación y siembra de precisión con dron XAG P30, sin pisar una sola planta.', MX, y, CW, 46);
+          y += nLineas * 46 + 48;
 
+          y += dibujarBotonWsp(ctx, MX, y, 'Cotizar por WhatsApp') + 64;
+
+          // Tarjeta del equipo, igual que .spec-card en el hero real.
+          // El alto del panel se calcula a partir de su propio contenido
+          // (no se estira hasta el borde inferior) para no dejar una
+          // franja vacía dentro del recuadro.
+          var panelY = y, padPanel = 40;
+          var py = panelY + padPanel;
+          var yTitulo = py + 66;
+          var yGrilla = yTitulo + 30, altoGrilla = 220;
+          var yStats = yGrilla + altoGrilla + 60;
+          var panelBottom = yStats + 34 + padPanel;
+          var panelH = panelBottom - panelY;
+
+          ctx.fillStyle = 'rgba(255,255,255,.07)';
+          trazarRectRedondeado(ctx, MX, panelY, CW, panelH, 28);
+          ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,.16)';
+          ctx.lineWidth = 2;
+          trazarRectRedondeado(ctx, MX, panelY, CW, panelH, 28);
+          ctx.stroke();
+
+          ctx.font = '400 24px Inter, sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,.5)';
+          ctx.fillText('EQUIPO OPERATIVO', MX + padPanel, py + 22);
+
+          ctx.font = '600 36px "Space Grotesk", sans-serif';
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText('Dron agrícola XAG P30', MX + padPanel, yTitulo);
+
+          dibujarSwath(ctx, MX + padPanel, yGrilla, CW - padPanel * 2, altoGrilla, t);
+
+          var colW = (CW - padPanel * 2) / 3;
+          [['6 m', 'ancho de pasada'], ['±10 cm', 'precisión RTK'], ['16 L', 'estanque']].forEach(function (s, i) {
+            var sx = MX + padPanel + i * colW;
+            ctx.font = '700 40px "Space Grotesk", sans-serif';
+            ctx.fillStyle = '#e8b74a';
+            ctx.fillText(s[0], sx, yStats);
+            ctx.font = '400 24px Inter, sans-serif';
+            ctx.fillStyle = 'rgba(255,255,255,.55)';
+            ctx.fillText(s[1], sx, yStats + 34);
+          });
+
+          ctx.font = '500 30px Inter, sans-serif';
           ctx.fillStyle = 'rgba(255,255,255,.85)';
-          ctx.font = '500 32px Inter, sans-serif';
-          ctx.fillText('WhatsApp +56 9 7424 0110 · @aeroingenia', 60, ALTO - 90);
+          ctx.fillText('WhatsApp +56 9 7424 0110 · @aeroingenia', MX, Math.min(panelBottom + 76, ALTO - 48));
 
           if (!origen.paused && !origen.ended) raf = requestAnimationFrame(dibujar);
         }
@@ -468,9 +644,10 @@
         // Cargar las tipografías antes de dibujar el primer cuadro, si no
         // el canvas usa la fuente de sistema en vez de la marca.
         var fuentes = [
-          document.fonts.load('700 62px "Space Grotesk"'),
+          document.fonts.load('700 72px "Space Grotesk"'),
           document.fonts.load('600 44px "Space Grotesk"'),
-          document.fonts.load('500 32px "Inter"')
+          document.fonts.load('400 34px "Inter"'),
+          document.fonts.load('500 30px "Inter"')
         ];
         Promise.all(fuentes).catch(function () {}).then(function () {
           if (seCanceloTodo) return;
