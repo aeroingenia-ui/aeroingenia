@@ -18,7 +18,8 @@
     '*Comuna del predio:*',
     '*Servicio:* (fumigación / siembra aérea / ambos)',
     '*Superficie aproximada:*',
-    '*Cultivo:*'
+    '*Cultivo:*',
+    '*Producto a aplicar:* (si ya lo tienes definido)'
   ].join('\n');
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
